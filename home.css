@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+h1 {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+/* 🎥 VÍDEO */
+.caixa-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.caixa-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 🎭 MÁSCARA */
+.mascara {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+   /* background: linear-gradient(
+        109deg,
+        rgba(10, 12, 16, 0.99) 15%,
+        rgba(10, 12, 16, 0.7) 50%,
+        rgba(10, 12, 16, 0.99) 85%
+    );*/
+}
+
+/* CONTEÚDO */
+.caixa-mae {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.caixa-principal {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.logo-mario {
+    height: 300px;
+    margin-left: 15px;
+}
+
+.logo-mario-luigi {
+    width: 400px;
+}
+
+p {
+    color: white;
+    font-size: 15px;
+}
+
+/* BOTÃO */
+button {
+    color: white;
+    background-color: #C51111;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+button:hover {
+    color: greenyellow;
+    font-size: 18px;
+    transition: 0.5s ease;
+}
+
+/* HEADER */
+.headers {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 30px;
+}
+
+
+
+a:hover {
+    color: greenyellow;
+    font-size: 18px;
+    transition: 0.5s ease;
+}
+
+.headers img {
+    width: 60px;
+}
+
+.headers a {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+
+}
+
+.headers a:hover {
+    color: #C51111;
+    font-size: 28px;
+    transition: 0.5s ease-in-out;
+}
+
+/* WHATSAPP */
+.link-whatsapp {
+    width: 60px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+/* FORM */
+.formulario-fale-conosco {
+    position: fixed;
+    top: 30%;
+    left: -300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 5px;
+    z-index: 2;
+    background: radial-gradient(circle, red, yellow); 
+    transition: left 1s ease-in-out;
+}
+
+input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 5px;
+}
+
+textarea {
+    width: 270px;
+    height: 100px;
+}
+
+.mascara-formulario {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        109deg, rgba(10, 12, 16, 0.99) 
+        15%, rgba(10, 12, 16, 0.7)    
+        50%, rgba(10, 12, 16, 0.99) 85%);
+    transition: visibility 1s ease-in-out;
+}
