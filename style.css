@@ -217,14 +217,15 @@ footer{
 }
 .form-group input:read-only{ background:#eee; cursor:not-allowed; opacity:.85; }
 
-.payment-options-container{ border-top:1px solid var(--border-color); margin-top:1.2rem; padding-top:1.2rem; }
+.payment-options-container{ margin-top:0.5rem; }
 .payment-options-container h4{ font-size:1rem; margin:0 0 1rem; }
 .payment-option{
   display:flex; align-items:center; gap:.75rem; padding:.75rem; border:1px solid var(--border-color);
   border-radius:.5rem; margin-bottom:.5rem; cursor:pointer; transition: border-color .2s, background .2s;
 }
 .payment-option:hover{ background:#fff; }
-.payment-option input[type="radio"]{ width:auto; }
+.payment-option input[type="radio"]{ width:auto; cursor:pointer; }
+.payment-option span{ cursor:pointer; }
 .payment-option.selected{ border-color: var(--primary-color); background: #fff3f7; }
 
 #troco-container{ display:none; margin-top:1rem; padding:1rem; background:#fff; border-radius:.5rem; border:1px solid var(--border-color); }

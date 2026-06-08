@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "delivery-address",
             ];
         } else {
-            fieldsToValidate = ["pickup-name", "pickup-date", "pickup-time"];
+            fieldsToValidate = ["pickup-name", "pickup-phone", "pickup-date", "pickup-time"];
         }
 
         fieldsToValidate.forEach((id) => {
@@ -305,6 +305,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // Validar forma de pagamento
+        const paymentChecked = document.querySelector('input[name="payment"]:checked');
+        if (!paymentChecked) {
+            alert("Por favor, selecione uma forma de pagamento.");
+            return;
+        }
+
         if (!valid) {
             alert(
                 "Por favor, preencha todos os campos obrigatórios marcados em vermelho.",
@@ -312,7 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const numeroWhatsApp = "558182362638";
         const itensPedido = carrinho
             .map((item) => `  - ${item.quantidade}x ${item.nome}`)
             .join("\n");
@@ -327,37 +333,46 @@ document.addEventListener("DOMContentLoaded", () => {
             cupomInfo = `\n*Cupom Aplicado:* ${appliedCoupon.code} (${formatarMoeda(discountAmount)})`;
         }
         const total = subtotal - discountAmount;
-        let mensagem = `*-- NOVO Pedido JFN Calhas --*\n\n*Itens:*\n${itensPedido}\n\n*Subtotal:* ${formatarMoeda(subtotal)}${cupomInfo}\n*Total:* ${formatarMoeda(total)}\n\n-------------------------\n\n`;
+        let mensagem = `*-- NOVO PEDIDO JFN CALHAS --*\n\n*Itens do Pedido:*\n${itensPedido}\n\n*Subtotal:* ${formatarMoeda(subtotal)}${cupomInfo}\n*Total:* ${formatarMoeda(total)}\n\n`;
 
         if (tipoEntrega === "delivery") {
             const nome = document.getElementById("delivery-name").value;
             const phone = document.getElementById("delivery-phone").value;
+            const cep = document.getElementById("delivery-cep").value;
             const address = document.getElementById("delivery-address").value;
 
-            const paymentMethod = document.querySelector(
-                'input[name="payment"]:checked',
-            ).value;
+            const paymentMethod = paymentChecked.value;
             let paymentInfo = `*Forma de Pagamento:* ${paymentMethod}`;
             if (paymentMethod === "Dinheiro") {
-                const troco = document.getElementById("troco-para").value;
+                const troco = document.getElementById("troco-amount").value;
                 paymentInfo += troco
                     ? ` (Troco para R$ ${troco})`
                     : " (Não precisa de troco)";
             }
-            mensagem += `*Tipo de Pedido:* Entrega\n\n*Nome:* ${nome}\n*Telefone:* ${phone}\n*Endereço:* ${address}\n\n${paymentInfo}`;
+            mensagem += `*Tipo de Entrega:* Orçamento no Local\n\n*Nome:* ${nome}\n*Telefone:* ${phone}\n*CEP:* ${cep}\n*Endereço:* ${address}\n\n${paymentInfo}`;
         } else {
             const nome = document.getElementById("pickup-name").value;
+            const phone = document.getElementById("pickup-phone").value;
             const dataInput = document.getElementById("pickup-date").value;
             const hora = document.getElementById("pickup-time").value;
             const [year, month, day] = dataInput.split("-");
             const dataFormatada = `${day}/${month}/${year}`;
 
-            mensagem += `*Tipo de Pedido:* Retirada\n\n*Nome para Retirada:* ${nome}\n*Data Agendada:* ${dataFormatada}\n*Hora Agendada:* ${hora}`;
+            mensagem += `*Tipo de Entrega:* Retirada\n\n*Nome:* ${nome}\n*Telefone:* ${phone}\n*Data Agendada:* ${dataFormatada}\n*Hora Agendada:* ${hora}`;
         }
 
-       
-        const url = `https://wa.me/${5511970233551}?text=${encodeURIComponent(mensagem)}`;
+        const numeroWhatsApp = "5511970233551";
+        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
         window.open(url, "_blank");
+        
+        // Limpar carrinho e fechar após envio
+        setTimeout(() => {
+            carrinho = [];
+            appliedCoupon = null;
+            couponInput.value = "";
+            atualizarCarrinho();
+            fecharCarrinho();
+        }, 500);
     };
 
     // --- EVENT LISTENERS ---
@@ -452,4 +467,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- INICIALIZAÇÃO ---
     filtrarEMostrarProdutos();
     atualizarCarrinho();
+    
+    // Mostrar o campo de troco por padrão já que Dinheiro é selecionado
+    trocoContainer.style.display = "block";
+    document.querySelector('.payment-option').classList.add('selected');
 });

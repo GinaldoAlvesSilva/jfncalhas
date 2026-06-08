@@ -114,6 +114,11 @@
                     <label for="pickup-date">Data de Retirada</label>
                     <input type="date" id="pickup-date" required />
                 </div>
+
+                <div class="form-group">
+                    <label for="pickup-time">Hora de Retirada</label>
+                    <input type="time" id="pickup-time" required />
+                </div>
             </div>
 
             <div id="troco-container" style="display: none;">
@@ -123,7 +128,25 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div id="payment-section">
+                <div class="form-group">
+                    <label>Forma de Pagamento</label>
+                    <div class="payment-options-container">
+                        <label class="payment-option selected">
+                            <input type="radio" name="payment" value="Dinheiro" checked />
+                            <span>Dinheiro</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Cartão" />
+                            <span>Cartão</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="Pix" />
+                            <span>Pix</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
                 <label for="coupon-input">Cupom de Desconto</label>
                 <div class="coupon-group">
                     <input type="text" id="coupon-input" placeholder="Digite seu cupom" />
